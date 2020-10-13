@@ -1,0 +1,8 @@
+[program:boards]
+command=/home/boards/venv/bin/python3.6  /home/boards/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/boards/run/gunicorn.sock board.wsgi:application
+directory=/home/boards/Forecast-board
+user=boards
+autostart=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/home/boards/logs/gunicorn.log
