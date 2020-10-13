@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+	
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/boost.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+    	var data3= {{ grid_imp }}
+
+    </script>
+    
+    
+    <script>
+      var data3= {{ grid_imp }}
+      Highcharts.chart('container', {
+        chart: {
+          type: 'spline'
+        },
+        title: {
+          text: 'Data from Collaborating Smart Solar-Powered Microgrids project'
+        },
+        subtitle: {
+          text: 'Konstanz (Germany) residential 4'
+        },
+        boost: {
+          seriesThreshold: 1
+
+        },
+        xAxis: {
+          type: 'datetime',
+          dateTimeLabelFormats: {  
+            month: '%e. %b \' %Y',
+            year: '%Y'
+          },
+        title: {
+            text: 'Date'
+          }
+        },
+        yAxis: {
+          title: {
+            text: 'Imported power (Wh)'
+          },
+          min: 0
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br>',
+          pointFormat: '{point.x:%e. %b \' %Y}: {point.y:.2f} Watt-hour'
+        },
+
+        plotOptions: {
+          series: {
+            marker: {
+              enabled: true
+            }
+          }
+        },
+
+        colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+
+      
+        series: [{
+        	name: "Grid import Power",
+          	data: data3,
+          	color: '#06C'
+        }], 
+
+
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 500
+            },
+            chartOptions: {
+              plotOptions: {
+                series: {
+                  marker: {
+                    radius: 2.5
+                  }
+                }
+              }
+            }
+          }]
+        }
+      })
+
+      
+      
+      
+    </script>
+
+{% endblock %}
+
+{% block figure %}
+
+      
+    <p class="highcharts-description">
+           This chart visualises a streaming data-set of a residential building in Konstanz with 15 munites time interval.
+            This visualises the measured power imported from the grid as available from the streaming data source. Note: All generated energy are exported to the grid and all consumed energy are imported from the grid. Some household have decentralize energy generation through installed Photovoltaic (PV) systems.
+    </p>
+   
+
+
+{% endblock %}
+    

@@ -1,0 +1,47 @@
+{% load static %}<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Podkova&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/chart.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'home' %}">Board</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="{% url 'arima' %}">Forecast_AR</a>
+	  <a class="nav-item nav-link" href="{% url 'dense' %}">Forecast_NEURAL</a>
+          <a class="nav-item nav-link" href="{% url 'gridexp' %}">Grid Export</a>
+          <a class="nav-item nav-link" href="{% url 'gridimp' %}">Grid Import</a>
+          <a class="nav-item nav-link" href="{% url 'solar' %}">Solar Power</a>
+        </div>
+      </div>
+    </nav>
+
+
+
+    <div id="container" style="height: 400px; min-width: 100px">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    <div style="height: 20px;min-width:100px;text-align: center;border-left: 50px;border-right: 50px">
+      <span id="contain" >
+        {% block figure %}
+        {% endblock %}
+      </span>
+    </div>
+
+  </body>
+
+ 
+</html>

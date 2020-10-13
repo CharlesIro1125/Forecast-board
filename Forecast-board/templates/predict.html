@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+
+
+
+
+
+
+{% block content %}
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/boost.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+    	var dview= {{total_load2}}
+    	var dpred= {{predicted}}
+    </script>
+
+
+    <script>
+
+	Highcharts.chart('container', {
+
+        	chart: {
+          		type: 'spline'
+        	},
+        	title: {
+          		text: 'Data from Collaborating Smart Solar-Powered Microgrids project'
+        	},
+        	subtitle: {
+          		text: 'Konstanz (Germany) residential 4'
+        	},
+        	boost: {
+          		seriesThreshold: 1
+
+        	},
+        	xAxis: {
+          		type: 'datetime',
+          		dateTimeLabelFormats: { 
+			month: '%e. %b \' %Y',
+            		year: '%Y'
+          		},
+        		title: {
+            		text: 'Date'
+          		}
+        	},
+        	yAxis: {
+          		title: {
+            		text: 'Total load (Wh)'
+          		},
+          		min: 0
+        	},
+        	tooltip: {
+          		headerFormat: '<b>{series.name}</b><br>',
+          		pointFormat: '{point.x:%e. %b \' %Y}: {point.y:.2f} Watt-hour'
+        	},
+
+        	plotOptions: {
+          		series: {
+            		marker: {
+              			enabled: true
+            		}
+          		}
+        	},
+
+        	colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+
+      
+        	series: [{
+          		name: "Total_load_consume",
+          		data: dview,
+          		color: '#39F'
+          	},{ 
+          		name: "two_months_ahead_predicted_load_consume",
+          		data: dpred,
+          		color: '#06c'
+        	}], 
+
+
+        	responsive: {
+          		rules: [{
+            		condition: {
+              			maxWidth:500
+            		},
+            		chartOptions: {
+              			plotOptions: {
+                			series: {
+                  				marker: {
+                    				radius:2.5
+                  				}
+                			}
+              			}
+            		}
+          		}]
+        	}
+      	})
+
+    </script>
+{% endblock %}
+
+
+{% block figure %}
+
+
+
+
+
+
+
+
+
+
+    <p class="highcharts-description">
+    		This chart visualises a streaming data set of a residential building in Konstanz with 15 munites time interval.
+            This visualises the total consumed energy predicted for two months using ARIMA model trained and saved as a state file to the Django application. Since the data showed some irregular pattern or rapid drop in value, which are not helpful in modeling the actual trend. To avoid such irregularities the model was train until "2017-01-20" and the forecast was done for the following two months. Note: all generated energy is exported to the grid and all consume energy is imported from the grid. Some household have decentralize energy generation through installed Photovoltaic (PV) systems.
+
+    </p>
+
+{% endblock %}

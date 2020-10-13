@@ -1,0 +1,36 @@
+#!/bin/bash
+
+NAME="postgres"
+DIR= /home/boards
+USER=boards
+GROUP=boards
+WORKERS=3
+BIND=unix:/home/boards/run/gunicorn.sock
+DJANGO_SETTINGS_MODULE=board.settings
+DJANGO_WSGI_MODULE=board.wsgi
+LOG_LEVEL=error
+#[Unit]
+#Description=gunicorn daemon
+#After=network.target
+
+#[Service]
+User=boards
+Group=boards
+export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+export PYTHONPATH=/home/boards/venv/lib/python3.6
+WorkingDirectory=/home/boards/Forecast-board
+exec /home/boards/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/boards/run/gunicorn.sock board.wsgi:application
+
+#cd /home/boards
+
+#source ./venv/bin/activate
+#export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
+#export PYTHONPATH=/home/boards/venv/lib/python3.6
+#exec ./venv/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+#  --name $NAME \
+#  --workers $WORKERS \
+#  --user=$USER \
+#  --group=$GROUP \
+#  --bind=$BIND \
+#  --log-level=$LOG_LEVEL \
+#  --log-file=-
