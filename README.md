@@ -18,6 +18,8 @@ e)research folder
 
 
 
+
+
 a) The board folder
 
 this folder contains the settings and configuration of the Django application. it also contains the URL file for routing request made by the client to the appropriate resource  on the server.
@@ -60,6 +62,7 @@ d) The research folder contains the various models (ARIMA and DENSE neural netwo
 e) The static/css folder contains all bootstrap and css scripts used in the front-end
 
 
+
 Another seperate files outside the Forecast-board folder are the files required for deploying the Django application to a server. This files are
 
 a) NGINX file
@@ -67,6 +70,7 @@ a) NGINX file
 b) Supervisor file
 
 c) Gunicorn file
+
 
 a) The NGINX is configured with HTTPS certificates. Meaning it will only accept requests via HTTPS. If the client tries to request via HTTP, NGINX will first redirect the user to the HTTPS, and only then it will decide what to do with the request.
 
