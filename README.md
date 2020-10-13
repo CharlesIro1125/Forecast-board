@@ -4,12 +4,16 @@ App repository
 the Forecast-board has directories to different part of the Django files.
 
 To view the major files for the application, go to Forecast-board directory under Forecast-board. 
-in this directory are the  
+In this directory are the  
 
 a)board folder
+
 b)forecast folder
+
 c)templates folder
+
 d)static/css folder
+
 e)research folder
 
 
